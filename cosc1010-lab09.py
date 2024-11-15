@@ -35,6 +35,48 @@
 # - Assign the parameter for sauce to the attribute.
 # - Create the toppings attribute, starting off as a list only holding cheese.
 
+class Pizza:
+
+    def __init__(self,size,sauce="red"):
+        self.sauce = sauce
+        self.toppings=["cheese"]
+        self.setsize(size)
+
+    def setsize(self,size):
+        if not size.isnumeric() or int(size)<10:
+            self.size=10
+        else:
+            self.size=int(size)
+
+    def getsize (self):
+        return self.size
+    
+    def setSauce(self,sauce):
+        self.sauce=sauce
+
+    def getSauce(self):
+        return self.sauce
+    
+    def addTopping(self,toppings):
+        for t in toppings:
+            self.toppings.append(t)
+
+    def getToppings(self):
+        return self.toppings
+        
+    def getAmountOfToppings(self):
+        return len(self.toppings)
+
+
+newpizza = Pizza("13","white")
+newpizza.setsize("17")
+size1 = newpizza.getsize()
+
+newpizza.setSauce("green")
+
+sauce1 = newpizza.getSauce()
+print(size1)
+print(sauce1)
 
 # You will be creating a Pizzeria class with the following attributes:
 # - orders, the number of orders placed. Should start at 0.
@@ -103,3 +145,37 @@ Your total price is $12.9
 
 Would you like to place an order? exit to exit
 """
+
+class Pizzeria:
+    def __init__(self):
+        self.orders=0
+        self.pizzas=[]
+
+        self.price_per_topping = 0.30
+        self.price_per_inch = 0.60
+
+    def placeOrder(self):
+       
+        size = input("Please enter the size of pizza, as a whole number. The smallest size is 10")
+
+        sauce = input("What kind of sauce would you like?  Leave blank for red sauce")
+
+        print("Please enter the toppings you would like, leave blank when done")
+        tops = []
+        while True:
+            top = input()
+            if top == "":
+                break
+            top.append(top)
+        
+        if sauce == "":
+            order = Pizza(size)
+            order.addTopping(tops)
+            self.pizzas.append(order)
+        else:
+            order = Pizza(size, sauce)
+            order.addTopping(tops)
+            self.pizzas.append(order)
+
+           
+
